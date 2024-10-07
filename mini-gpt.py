@@ -1,6 +1,11 @@
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
+import datetime
+
+# Log the start time
+start_time = datetime.datetime.now()
+print(f"Script started at: {start_time}")
 
 # hyperparameters
 batch_size = 64    # how many independent sequences will we process in parallel?
@@ -158,7 +163,8 @@ class BigramLanguageModel(nn.Module):
         # each token directly reads off the logits for the next token from a lookup table
         self.token_embedding_table = nn.Embedding(vocab_size, n_embd)
         self.position_embedding_table = nn.Embedding(block_size, n_embd)
-        self.blocks = nn.Sequential(*[Block(n_embd, n_head=n_head) for _ in range(n_layer)])
+        self.blocks = nn.Sequential(
+            *[Block(n_embd, n_head=n_head) for _ in range(n_layer)])
         self.ln_f = nn.LayerNorm(n_embd)        # Final Layer Norm
         # self.sa_heads = MultiHeadAttention(4, (n_embd // 4))                  # i.e. 4 heads of 8-dimensional self-attention
         # self.ffwd = FeedForward(n_embd)
@@ -235,3 +241,15 @@ for iter in range(max_iters):
 # generate from the model
 context = torch.zeros((1, 1), dtype=torch.long, device=device)
 print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
+open('more.txt', 'w').write(
+    decode(m.generate(context, max_new_tokens=10000)[0].tolist()))
+
+
+# Log the end time
+end_time = datetime.datetime.now()
+print(f"Script ended at: {end_time}")
+
+# Calculate and display the time taken
+time_taken = end_time - start_time
+hours_taken = time_taken.total_seconds() / 3600
+print(f"Total time taken: {hours_taken} hours")
