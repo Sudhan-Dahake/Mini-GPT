@@ -90,4 +90,4 @@ After training, the model will generate Shakespearean-style text. Please refer t
 
 ## Credits
 
-Andrej Karpathy
+Inspired from Andrej Karpathy
