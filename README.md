@@ -11,6 +11,7 @@ This project implements a Mini-GPT model with approximately 10 million parameter
   - [Training](#training)
   - [Generating Text](#generating-text)
 - [Results](#results)
+- [Credits](#credits)
 
 ## Overview
 
@@ -86,3 +87,7 @@ Once training is complete, you can generate text using the trained model by runn
 ## Results
 
 After training, the model will generate Shakespearean-style text. Please refer to `more.txt` for the full generated text.
+
+## Credits
+
+Andrej Karpathy
